@@ -9,7 +9,7 @@ function main() {
     parentId: 3
   });
   addCategory({
-    name: "sajeda",
+    name: "salma",
     desc: "hi",
     parentId: 3
   });
@@ -36,3 +36,10 @@ function validateItem(item) {
   } else return false;
 }
 arr;
+
+function getsSubCategoriesById(id)
+{
+     const subCat= arr.filter(object => object.parentId === id);
+     console.log(subCat);
+return subCat;
+}

@@ -13,7 +13,8 @@ function main() {
     desc: "hi",
     parentId: 3
   });
-  getsSubCategoriesById(3);
+  const subCat=getsSubCategoriesById(3);
+  const allCat =getCategoriesAsFlatList();
 }
 
 function addCategory(item) {
@@ -41,3 +42,9 @@ function getsSubCategoriesById(id) {
   const subCat = arr.filter(object => object.parentId === id);
   return subCat;
 }
+function getCategoriesAsFlatList() {
+// const flat_list =arr.flat();
+const flat=[].concat(...arr);
+return flat;
+}
+

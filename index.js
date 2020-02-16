@@ -13,6 +13,7 @@ function main() {
     desc: "hi",
     parentId: 3
   });
+  getsSubCategoriesById(3);
 }
 
 function addCategory(item) {
@@ -21,7 +22,6 @@ function addCategory(item) {
     newitem = { id, ...item };
     arr.push(newitem);
     arr;
-    console.log(arr);
   }
 }
 function validateItem(item) {
@@ -37,9 +37,7 @@ function validateItem(item) {
 }
 arr;
 
-function getsSubCategoriesById(id)
-{
-     const subCat= arr.filter(object => object.parentId === id);
-     console.log(subCat);
-return subCat;
+function getsSubCategoriesById(id) {
+  const subCat = arr.filter(object => object.parentId === id);
+  return subCat;
 }

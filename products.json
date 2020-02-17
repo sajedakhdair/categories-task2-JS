@@ -1,0 +1,10 @@
+[{"id":1,"name":"vseivwright0","price":778,"date":"9/22/2019","categoryId":1,"stockCount":6},
+{"id":2,"name":"cpethybridge1","price":344,"date":"2/22/2019","categoryId":5,"stockCount":38},
+{"id":3,"name":"jbearne2","price":906,"date":"4/14/2019","categoryId":9,"stockCount":64},
+{"id":4,"name":"xainscough3","price":498,"date":"3/2/2019","categoryId":1,"stockCount":100},
+{"id":5,"name":"jcasali4","price":165,"date":"11/26/2019","categoryId":10,"stockCount":82},
+{"id":6,"name":"hhackworth5","price":126,"date":"8/22/2019","categoryId":4,"stockCount":46},
+{"id":7,"name":"mcolman6","price":642,"date":"8/7/2019","categoryId":10,"stockCount":79},
+{"id":8,"name":"fjosling7","price":834,"date":"8/11/2019","categoryId":6,"stockCount":57},
+{"id":9,"name":"nlanham8","price":982,"date":"8/20/2019","categoryId":8,"stockCount":40},
+{"id":10,"name":"cmossop9","price":809,"date":"7/17/2019","categoryId":1,"stockCount":4}]

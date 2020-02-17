@@ -13,6 +13,7 @@ function main() {
     desc: "hi",
     parentId: 3
   });
+  writeCat();
 }
 
 function addCategory(item) {
@@ -36,3 +37,7 @@ function validateItem(item) {
   } else return false;
 }
 arr;
+function writeCat()
+{
+fs.writeFileSync("./categories.json", JSON.stringify(arr),"utf-8");
+}

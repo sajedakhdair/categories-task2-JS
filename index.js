@@ -1,43 +1,59 @@
 const fs = require("fs");
-var arrString = fs.readFileSync("./categories.json", "utf-8");
-var arr = JSON.parse(arrString);
+var categoriesString = fs.readFileSync("./categories.json", "utf-8");
+var categories = JSON.parse(categoriesString);
 main();
 function main() {
-  addCategory({
-    name: "sajeda",
-    desc: "hi",
-    parentId: 3
+  addController({
+    name: "Salma",
+    desc: "hi,My name is Salma",
+    parentId: 4
   });
-  addCategory({
-    name: "sajeda",
-    desc: "hi",
-    parentId: 3
+  addController({
+    name: "Salma",
+    desc: "hi,My name is Salma",
+    parentId: 9
   });
-  writeCat();
+  addController({
+    name: "Doaa",
+    desc: "hi,My name is Doaa",
+    parentId: undefined
+  });
+  writeCatOnFile();
 }
-
-function addCategory(item) {
-  let id = validateItem(item);
-  if (id) {
-    newitem = { id, ...item };
-    arr.push(newitem);
-    arr;
-    console.log(arr);
+function addController(item) {
+  const isValid = validateItem(item);
+  if (isValid === true) {
+    return addItem(item);
   }
 }
 function validateItem(item) {
-  let myname = item.name;
-  let pid = item.parentId;
-  const values = Object.values(arr[arr.length - 1]);
-  const id = values[0] + 1;
-  const arrayofname = arr.filter(object => object.name === myname);
-  if (arrayofname.length == 0) {
-    //////////////////
-    if (pid == null || typeof pid === "number") return id;
-  } else return false;
+  let valid_name = validateName(item.name);
+  let valide_parentId = validateParentId(item.parentId);
+  let errors = [];
+  if (valid_name === true && valide_parentId === true) {
+    return true;
+  }
+  if (valid_name !== true) {
+    errors.push(valid_name);
+  }
+  if (valide_parentId !== true) errors.push(valide_parentId);
+  return errors;
 }
-arr;
-function writeCat()
-{
-fs.writeFileSync("./categories.json", JSON.stringify(arr),"utf-8");
+function validateName(myname) {
+  const nameOfCategories = categories.some(object => object.name === myname);
+  if (nameOfCategories== false) {
+    return true;
+  } else return { name: "name is not unique" };
+}
+function validateParentId(pid) {
+  if (pid === null || typeof pid === "number") return true;
+  else return { parentId: "does not exist" };
+}
+function addItem(item) {
+  let id = categories[categories.length - 1].id + 1;
+  categories.push({ id, ...item });
+}
+categories;
+function writeCatOnFile() {
+  fs.writeFileSync("./categories.json", JSON.stringify(categories), "utf-8");
 }

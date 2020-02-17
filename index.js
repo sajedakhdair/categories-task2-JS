@@ -13,6 +13,7 @@ function main() {
     desc: "hi",
     parentId: 3
   });
+  getProducts(10);
 }
 
 function addCategory(item) {
@@ -21,7 +22,6 @@ function addCategory(item) {
     newitem = { id, ...item };
     arr.push(newitem);
     arr;
-    console.log(arr);
   }
 }
 function validateItem(item) {
@@ -36,3 +36,8 @@ function validateItem(item) {
   } else return false;
 }
 arr;
+function getProducts(catId) {
+  var arrProductString = fs.readFileSync("./products.json", "utf-8");
+  var arrProduct = JSON.parse(arrProductString);
+  const products = arrProduct.filter(object => object.categoryId === catId);
+}

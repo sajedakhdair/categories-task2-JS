@@ -18,6 +18,11 @@ function main() {
     desc: "hi,My name is Doaa",
     parentId: undefined
   });
+  let updateItem1 = updateCategory(categories, 11, { name: "Rajaa" });
+  let updateItem2 = updateCategory(categories, 12, {
+    name: "Doaa",
+    desc: "My name is Doaa"
+  });
   writeCatOnFile();
 }
 function addController(item) {
@@ -41,7 +46,7 @@ function validateItem(item) {
 }
 function validateName(myname) {
   const nameOfCategories = categories.some(object => object.name === myname);
-  if (nameOfCategories== false) {
+  if (nameOfCategories == false) {
     return true;
   } else return { name: "name is not unique" };
 }
@@ -53,6 +58,33 @@ function addItem(item) {
   let id = categories[categories.length - 1].id + 1;
   categories.push({ id, ...item });
 }
+function updateCategory(categories, id, newDataForItem) {
+  if (newDataForItem.parentId === undefined) {
+    newDataForItem.parentId = null;
+    var flagUndfined = true;
+  }
+  //this flag to ensure that validate_parentId not fail here if there is no update in parentid
+  //if doesn't enter new value for parentId
+  const isValid = validateItem(newDataForItem);
+  if (flagUndfined === true) newDataForItem.parentId = undefined;
+  if (isValid === true) {
+    let ItemAfterUpdate = {};
+    const ItemBeforeUpdate = categories.find(object => object.id === id);
+    const index = categories.findIndex(object => object.id === id);
+    if (newDataForItem.name !== undefined)
+      ItemAfterUpdate.name = newDataForItem.name;
+    else ItemAfterUpdate.name = ItemBeforeUpdate.name;
+    if (newDataForItem.desc !== undefined)
+      ItemAfterUpdate.desc = newDataForItem.name;
+    else ItemAfterUpdate.desc = ItemBeforeUpdate.desc;
+    if (newDataForItem.parentId !== undefined)
+      ItemAfterUpdate.parentId = newDataForItem.parentId;
+    else ItemAfterUpdate.parentId = ItemBeforeUpdate.parentId;
+    ItemAfterUpdate = { id, ...ItemAfterUpdate };
+    categories[index] = ItemAfterUpdate;
+    return ItemAfterUpdate;
+  } else return isValid;
+};
 categories;
 function writeCatOnFile() {
   fs.writeFileSync("./categories.json", JSON.stringify(categories), "utf-8");

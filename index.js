@@ -1,10 +1,20 @@
+const categoriesFilePath = "./categories.json";
 const fs = require("fs");
-var categoriesString = fs.readFileSync("./categories.json", "utf-8");
-var categories = JSON.parse(categoriesString);
+function readFromJsonFile(filePath) {
+  var categoriesString = fs.readFileSync(categoriesFilePath, "utf-8");
+  return categoriesString;
+}
+var categories;
 main();
 function main() {
+  categories = JSON.parse(readFromJsonFile(categoriesFilePath));
   addController({
     name: "Salma",
+    desc: "hi,My name is Salma",
+    parentId: 4
+  });
+  addController({
+    name: "Salmassssssssssssssssssssssssssssssssssssssssssssssssssss",
     desc: "hi,My name is Salma",
     parentId: 4
   });
@@ -84,8 +94,7 @@ function updateCategory(categories, id, newDataForItem) {
     categories[index] = ItemAfterUpdate;
     return ItemAfterUpdate;
   } else return isValid;
-};
-categories;
+}
 function writeCatOnFile() {
-  fs.writeFileSync("./categories.json", JSON.stringify(categories), "utf-8");
+  fs.writeFileSync(categoriesFilePath, JSON.stringify(categories), "utf-8");
 }

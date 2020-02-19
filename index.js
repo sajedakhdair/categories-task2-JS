@@ -5,24 +5,38 @@ main();
 function main() {
   addController({
     name: "Salma",
-    desc: "hi,My name is Salma",
+    description: "hi,My name is Salma",
     parentId: 4
   });
   addController({
     name: "Salma",
-    desc: "hi,My name is Salma",
+    description: "hi,My name is Salma",
     parentId: 9
   });
   addController({
     name: "Doaa",
-    desc: "hi,My name is Doaa",
+    description: "hi,My name is Doaa",
     parentId: undefined
   });
   let updateItem1 = updateCategory(categories, 11, { name: "Rajaa" });
   let updateItem2 = updateCategory(categories, 12, {
     name: "Doaa",
-    desc: "My name is Doaa"
+    description: "My name is Doaa"
   });
+  let resultOfSearchName = searchCategory(
+    categories,
+    "name",
+    "startsWith",
+    "c"
+  );
+  console.log(resultOfSearchName);
+  let resultOfSearchDesc = searchCategory(
+    categories,
+    "description",
+    "includes",
+    "My name"
+  );
+  console.log(resultOfSearchDesc);
   writeCatOnFile();
 }
 function addController(item) {
@@ -74,9 +88,9 @@ function updateCategory(categories, id, newDataForItem) {
     if (newDataForItem.name !== undefined)
       ItemAfterUpdate.name = newDataForItem.name;
     else ItemAfterUpdate.name = ItemBeforeUpdate.name;
-    if (newDataForItem.desc !== undefined)
-      ItemAfterUpdate.desc = newDataForItem.name;
-    else ItemAfterUpdate.desc = ItemBeforeUpdate.desc;
+    if (newDataForItem.description !== undefined)
+      ItemAfterUpdate.description = newDataForItem.description;
+    else ItemAfterUpdate.description = ItemBeforeUpdate.description;
     if (newDataForItem.parentId !== undefined)
       ItemAfterUpdate.parentId = newDataForItem.parentId;
     else ItemAfterUpdate.parentId = ItemBeforeUpdate.parentId;
@@ -84,8 +98,27 @@ function updateCategory(categories, id, newDataForItem) {
     categories[index] = ItemAfterUpdate;
     return ItemAfterUpdate;
   } else return isValid;
-};
-categories;
+}
+function searchCategory(categories, field, compareLogic, searchText) {
+  let lowerCasesearchText = searchText.toLowerCase();
+  if (compareLogic === "startsWith") {
+    var resultOfSearch = categories.filter(object =>
+      object[field].toLowerCase().startsWith(lowerCasesearchText)
+    );
+  } else if (compareLogic === "endsWith") {
+    var resultOfSearch = categories.filter(object =>
+      object[field].toLowerCase().endsWith(lowerCasesearchText)
+    );
+  } else if (compareLogic === "includes") {
+    var resultOfSearch = categories.filter(object =>
+      object[field].toLowerCase().includes(lowerCasesearchText)
+    );
+  }
+  return resultOfSearch;
+}
 function writeCatOnFile() {
   fs.writeFileSync("./categories.json", JSON.stringify(categories), "utf-8");
 }
+module.exports = {
+  searchCategory
+};

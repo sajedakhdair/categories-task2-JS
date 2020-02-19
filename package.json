@@ -1,0 +1,26 @@
+{
+  "name": "categories-task2-js",
+  "jest": {
+    "bail": 1,
+    "verbose": true
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "Test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sajedakhdair/categories-task2-JS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sajedakhdair/categories-task2-JS/issues"
+  },
+  "homepage": "https://github.com/sajedakhdair/categories-task2-JS#readme",
+  "devDependencies": {
+    "jest": "^25.1.0"
+  }
+}

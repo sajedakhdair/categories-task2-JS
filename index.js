@@ -14,11 +14,6 @@ function main() {
     parentId: 4
   });
   addController({
-    name: "Salmassssssssssssssssssssssssssssssssssssssssssssssssssss",
-    desc: "hi,My name is Salma",
-    parentId: 4
-  });
-  addController({
     name: "Salma",
     desc: "hi,My name is Salma",
     parentId: 9
@@ -28,10 +23,10 @@ function main() {
     desc: "hi,My name is Doaa",
     parentId: undefined
   });
-  let updateItem1 = updateCategory(categories, 11, { name: "Rajaa" });
+  let updateItem1 = updateCategory(categories, 11, { name: "Rajaaa" });
   let updateItem2 = updateCategory(categories, 12, {
-    name: "Doaa",
-    desc: "My name is Doaa"
+    name: "Doaaa",
+    description: "My name is Doaa Khdair"
   });
   writeCatOnFile();
 }
@@ -75,25 +70,14 @@ function updateCategory(categories, id, newDataForItem) {
   }
   //this flag to ensure that validate_parentId not fail here if there is no update in parentid
   //if doesn't enter new value for parentId
+  const ItemBeforeUpdate = categories.find(object => object.id === id);
   const isValid = validateItem(newDataForItem);
   if (flagUndfined === true) newDataForItem.parentId = undefined;
-  if (isValid === true) {
-    let ItemAfterUpdate = {};
-    const ItemBeforeUpdate = categories.find(object => object.id === id);
-    const index = categories.findIndex(object => object.id === id);
-    if (newDataForItem.name !== undefined)
-      ItemAfterUpdate.name = newDataForItem.name;
-    else ItemAfterUpdate.name = ItemBeforeUpdate.name;
-    if (newDataForItem.desc !== undefined)
-      ItemAfterUpdate.desc = newDataForItem.name;
-    else ItemAfterUpdate.desc = ItemBeforeUpdate.desc;
-    if (newDataForItem.parentId !== undefined)
-      ItemAfterUpdate.parentId = newDataForItem.parentId;
-    else ItemAfterUpdate.parentId = ItemBeforeUpdate.parentId;
-    ItemAfterUpdate = { id, ...ItemAfterUpdate };
-    categories[index] = ItemAfterUpdate;
-    return ItemAfterUpdate;
-  } else return isValid;
+  if (isValid !== true) {
+    return isValid;
+  }
+  const index = categories.findIndex(object => object.id === id);
+  categories[index] = { ...ItemBeforeUpdate, ...newDataForItem };
 }
 function writeCatOnFile() {
   fs.writeFileSync(categoriesFilePath, JSON.stringify(categories), "utf-8");

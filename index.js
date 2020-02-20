@@ -28,7 +28,9 @@ function main() {
     name: "Doaaa",
     description: "My name is Doaa Khdair"
   });
-  writeCatOnFile(categoriesFilePath,categories);
+  let productsWithSameCatId = getProducts(10);
+  console.log(productsWithSameCatId);
+  writeCatOnFile(categoriesFilePath, categories);
 }
 function addController(item) {
   const isValid = validateItem(item);
@@ -60,7 +62,7 @@ function validateParentId(pid) {
   if (typeof pid === " number") {
     return true;
   }
-  return { parentId: "does not exist" }
+  return { parentId: "does not exist" };
 }
 function addItem(item) {
   let id = categories[categories.length - 1].id + 1;
@@ -82,6 +84,18 @@ function updateCategory(categories, id, newDataForItem) {
   const index = categories.findIndex(object => object.id === id);
   categories[index] = { ...ItemBeforeUpdate, ...newDataForItem };
 }
-function writeCatOnFile(filePath,data) {
+function writeCatOnFile(filePath, data) {
   fs.writeFileSync(filePath, JSON.stringify(data), "utf-8");
+}
+function getProducts(catId) {
+  const productsFilePath = "./products.json";
+  let productsArray = readWithRequire(productsFilePath);
+  const productsWithSameCatId = productsArray.filter(
+    object => object.categoryId === catId
+  );
+  return productsWithSameCatId;
+}
+function readWithRequire(filePath) {
+  const productsArray = require(filePath);
+  return productsArray;
 }

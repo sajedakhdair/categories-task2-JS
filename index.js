@@ -56,8 +56,11 @@ function validateName(myname) {
   } else return { name: "name is not unique" };
 }
 function validateParentId(pid) {
-  if (pid === null || typeof pid === "number") return true;
-  else return { parentId: "does not exist" };
+  if (pid === null) return true;
+  if (typeof pid === " number") {
+    return true;
+  }
+  return { parentId: "does not exist" }
 }
 function addItem(item) {
   let id = categories[categories.length - 1].id + 1;
